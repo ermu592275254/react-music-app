@@ -28,12 +28,12 @@ class PlayCtrl extends React.Component {
     }
 
     lastSong() {
-        let song = common.changeSong(this.props.songList,this.props.currentSong.id,this.props.playMode,false,false);
+        let song = common.changeSong(this.props.songList,this.props.currentSong.songid,this.props.playMode,false,false);
         this.props.dispatch(playSong(song));
     }
 
     nextSong() {
-        let song = common.changeSong(this.props.songList,this.props.currentSong.id,this.props.playMode,true,false);
+        let song = common.changeSong(this.props.songList,this.props.currentSong.songid,this.props.playMode,true,false);
         this.props.dispatch(playSong(song));
     }
 

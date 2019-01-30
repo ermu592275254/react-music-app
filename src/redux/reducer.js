@@ -19,8 +19,11 @@ let currentSong = (state = {}, action) => {
     let stateCopy = {...state}
     switch (action.type) {
         case 'PLAY_SONG':
+            if(state.songid == action.song.songid){
+                console.log('id is both')
+                return state;
+            }
             stateCopy = action.song;
-            console.log(stateCopy);
             return stateCopy;
         case 'PROGRESS_MOVE':
             stateCopy.percent = action.percent;
@@ -137,22 +140,6 @@ let showPlayBar = (state = true, action) => {
 //             return state;
 //     }
 // }
-/*******以下reducer不存在会报错，但不会影响程序的执行******/
-let match = (state = {}, action) => {
-    return state
-}
-let location = (state = {}, action) => {
-    return state
-}
-let history = (state = {}, action) => {
-    return state
-}
-let staticContext = (state = {}, action) => {
-    return state
-}
-let data = (state = {}, action) => {
-    return state
-}
 
 
 export default {
@@ -165,9 +152,4 @@ export default {
     failArmyInfo,
     showPlayList,
     showPlayBar,
-    match,
-    location,
-    history,
-    staticContext,
-    data
 }

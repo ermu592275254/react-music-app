@@ -5,7 +5,7 @@ import "../../styles/search.less";
 import common from "../../common";
 import SearchHistory from "./SearchHistory";
 import {connect} from "react-redux";
-import {playSong} from '../../redux/actions'
+import {playSong,addSongToPlayList} from '../../redux/actions'
 import {getList} from "../../redux/asyncAction";
 
 
@@ -65,6 +65,7 @@ class Search extends React.Component {
     // 点击歌曲
     clickSong = (item) => {
         console.log(item);
+        this.props.dispatch(addSongToPlayList(item))
         this.props.dispatch(playSong(item));
         // 加入到播放列表
         // 获取歌曲信息并播放

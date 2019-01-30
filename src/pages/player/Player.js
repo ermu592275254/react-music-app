@@ -30,7 +30,7 @@ class Player extends React.Component {
             <div className="player-page">
                 <div className="bg-filter" style={bgImg}></div>
                 {/*<Header bgColor="transparent" title={this.props.name}/>*/}
-                <PlayerHeader name={this.props.songname} author={this.props.singer} back={this.back.bind(this)}/>
+                <PlayerHeader isPlaying={this.props.isPlaying} name={this.props.songname} author={this.props.singer} back={this.back.bind(this)}/>
                 <div className="tab-page">
                     <Disc isPlaying={this.props.isPlaying} albumImg={albumImg}/>
                 </div>

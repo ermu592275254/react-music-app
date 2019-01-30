@@ -78,7 +78,7 @@ let storage = {
  */
 let changeSong = (list, id, playMode, isNext, isAuto) => {
     let currentIndex = list.findIndex(item => {
-        return item.id === id
+        return item.songid === id
     })
     let newSong = {};
 

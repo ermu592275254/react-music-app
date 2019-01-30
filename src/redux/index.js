@@ -22,7 +22,7 @@ const defaultStore = {
         albumImg:albumImg2,
         songUrl:'',
         lyrics:'',
-        id:0,
+        songid:0,
         interval:278,
         percent:0,
         isPlaying: false,
@@ -40,7 +40,7 @@ const defaultStore = {
         albumImg:albumImg,
         songUrl:again,
         lyrics:'',
-        id:1,
+        songid:1,
         interval:257,
         percent:0,
         isPlaying: false,
@@ -56,7 +56,7 @@ const defaultStore = {
         albumImg:albumImg,
         songUrl:GLORIA,
         lyrics:'',
-        id:2,
+        songid:2,
         interval:257,
         percent:0,
         isPlaying: false,
@@ -78,14 +78,9 @@ let combine = combineReducers(reducer);
 const store = createStore(combine,defaultStore,applyMiddleware(thunk));
 
 let unlistenstore = store.subscribe(()=>{
-    console.log(store.getStates())
+    console.log(store.getState())
 })
 unlistenstore();
-
-// store.dispatch(getList());
-// store.dispatch(getFailArmy());
-// store.dispatch(getFailArmyInfo());
-console.log(store.getState())
 
 //用这玩意儿来管理路由更好哦
 const history = createHistory();
