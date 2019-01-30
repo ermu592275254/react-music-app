@@ -70,7 +70,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://ermu592275254.github.io",
+  "homepage": "https://ermu592275254.github.io/create-react-app",
   "eslintConfig": {
     "extends": "react-app"
   },
