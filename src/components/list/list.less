@@ -1,0 +1,42 @@
+.list-grid{
+    width: 100%;
+    padding: 0 10px;
+    margin: 0;
+    border-top: 1px solid #ccc;
+    box-sizing: border-box;
+    overflow: scroll;
+    .list-item{
+        border-bottom: 1px solid #ccc;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        list-style: none;
+        padding: 5px;
+        .content{
+            width: 100%;
+            flex-shrink: 0;
+            .name{
+                font-size: 14px;
+                color: #333;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+            span{
+                font-size: 12px;
+                color: #999;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+        .play-button{
+
+        }
+        .more{
+
+        }
+    }
+}

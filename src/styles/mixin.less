@@ -1,0 +1,193 @@
+@default-bd-color: #eaeaea;
+
+//单行省略
+.ellipsis(){
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+//多行省略
+.ellipsis-more-line(@line:2){
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: @line;
+    overflow: hidden;
+    text-overflow:ellipsis;
+}
+
+// 几个居中position默认用relative，受到文档流约束，如果不需要约束，可以传入absolute
+// 水平居中
+.h-center(@position: relative) {
+    position: @position;
+    left: 50%;
+    transform: translate(-50%,0);
+    transform-origin: 50% 50%;
+}
+
+// 垂直居中
+.v-center(@position: relative){
+    position: @position;
+    top: 50%;
+    transform: translate(0,-50%);
+    transform-origin: 50% 50%;
+}
+
+// 水平、垂直居中
+.hv-center(@position: relative) {
+    position: @position;
+    left: 50%;
+    top: 50%;
+    transform:translate(-50%,-50%);
+    transform-origin: 50% 50%;
+}
+// 清除浮动
+.clearfix() {
+    &::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+
+/****************1px适配方案***************/
+
+// 内部方法，请勿引用
+.border-1px-base() {
+    position: relative;
+    &::before, &::after {
+        content: "";
+        display: block;
+        position: absolute;
+    }
+}
+
+// 内部方法，请勿引用
+.border-1px-tb-base() {
+    @media(-webkit-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+        width: 200%;
+        transform: scale(.5) translateZ(0);
+    }
+    @media(-webkit-device-pixel-ratio: 3), (min-resolution: 3dppx) {
+        width: 300%;
+        transform: scale(.333) translateZ(0);
+    }
+}
+
+// 内部方法，请勿引用
+.border-1px-lr-base() {
+    @media(-webkit-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+        height: 200%;
+        transform: scale(.5) translateZ(0);
+    }
+    @media(-webkit-device-pixel-ratio: 3), (min-resolution: 3dppx) {
+        height: 300%;
+        transform: scale(.333) translateZ(0);
+    }
+}
+
+.border-1px(@color: @default-bd-color, @radius: 2px, @style: solid) {
+    .border-1px-base();
+    &::after {
+        pointer-events: none;
+        transform-origin: 0 0;
+        left: 0;
+        top: 0;
+        border: 1px @style @color;
+        border-radius: @radius;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+
+        @media(-webkit-device-pixel-ratio: 2),(min-resolution: 2dppx){
+            width: 200%;
+            height: 200%;
+            border-radius: @radius * 2;
+            transform: scale(.5) translateZ(0);
+        }
+        @media(-webkit-device-pixel-ratio: 3),(min-resolution: 3dppx) {
+            width: 300%;
+            height: 300%;
+            border-radius: @radius * 3;
+            transform: scale(.333) translateZ(0);
+        }
+    }
+}
+
+// .border-top-1px 和 .border-left-1px 都是使用::before，所以无法公用，如果需要用到，可增加一个容器。.border-bottom-1px 和 .border-right-1px 同理
+.border-top-1px(@color: @default-bd-color, @style: solid) {
+    .border-1px-base();
+    &::before {
+        border-top: 1px @style @color;
+        left: 0;
+        top: 0;
+        width: 100%;
+        transform-origin: 0 top;
+        .border-1px-tb-base();
+    }
+}
+
+.border-bottom-1px(@color: @default-bd-color, @style: solid) {
+    .border-1px-base();
+    &::after {
+        border-bottom: 1px @style @color;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        transform-origin: 0 bottom;
+        .border-1px-tb-base();
+    }
+}
+
+.border-left-1px(@color: @default-bd-color, @style: solid) {
+    .border-1px-base();
+    &::before {
+        border-left: 1px @style @color;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform-origin: left 0;
+        .border-1px-lr-base();
+    }
+}
+
+.border-right-1px(@color: @default-bd-color, @style: solid) {
+    .border-1px-base();
+    &::after {
+        border-right: 1px @style @color;
+        top: 0;
+        right: 0;
+        height: 100%;
+        transform-origin: right 0;
+        .border-1px-lr-base();
+    }
+}
+/****************end***************/
+
+// iPhoneX底部适配函数
+.iphonex(@rules) {
+    @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) {
+        @rules();
+    }
+}
+
+// 适配与底部的距离，在iPhoneX下会自动增加34px
+.adapted-iphonex(@height: 50px, @prop: padding-bottom) {
+        @{prop}: @height;
+    .iphonex({
+            @{prop}: @height + 34px;
+    });
+}
+
+// 图标公用函数
+.icon(@url,@bgSize: 25px, @width: 50px, @height: @width) {
+    display: inline-block;
+    height: @height;
+    width: @width;
+    vertical-align: middle;
+    background: url(@url) no-repeat center center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-size: @bgSize;
+}
